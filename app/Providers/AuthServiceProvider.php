@@ -25,7 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::routes();
+        Passport::routes(function($router){
+            $router->forAccessTokens(); // To genarate only AccessTokens Routes
+        }
+
+        );
 
         //
     }

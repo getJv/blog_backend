@@ -5,3 +5,13 @@ Client secret: fo3iP16mskqm7z8OmvEjI8Ksv7C3sc9FsovohCcE
 Password grant client created successfully.
 Client ID: 2
 Client secret: VuLdeNy3tTnxvBniBGRiaPkWG6SWZ9iBOkhgjPg2
+
+-- 
+
+Encryption keys already exist. Use the --force option to overwrite them.
+Personal access client created successfully.
+Client ID: 1
+Client secret: 1dtOL5bFfn11oAg5SYsEfwmpuTZEvHy8XoumUH40
+Password grant client created successfully.
+Client ID: 2
+Client secret: IqX0dFl7h2Av5znVyNN4CsXOZbFN1w5NlcpND8dr
