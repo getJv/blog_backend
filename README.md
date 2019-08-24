@@ -4,11 +4,15 @@ Backend
 Local Deploy Sequence
 ---------------------
 
-1. `git clone https://github.com/getJv/blog_backend.git`
-2. `cd blog`
-3. `php artisan migrate`
-4. `php artisan passport:install`
-5. `php artisan serve`
+1. Run `git clone https://github.com/getJv/blog_backend.git`
+2. Run `cd blog`
+3. Run `composer install`
+4. Run `php artisan key:generate`
+5. Set your database params at .env file 
+6. Run `php artisan migrate`
+6. Run `php artisan passport:install`
+7. Run `php artisan serve`
+8. Enjoy your App
 
 Routes
 ------

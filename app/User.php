@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,10 +38,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'email' => 'varchar',
+        'username' => 'varchar',
     ];
 
+    // put here all user field used to log in
     public function findForPassport($identifier)
     {
-        return $this->orWhere('username', $identifier)->orWhere('email', $identifier)->first();
+        return $this->orWhere('email', $identifier)->first();
     }
 }
