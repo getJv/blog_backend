@@ -32,21 +32,34 @@ class AuthController extends Controller
         try {
 
             $loginData = $request->validate([
-                'email' => 'required|email',
+                'username' => 'required|email',
                 'password' => 'required'
             ]);
 
-            if (!auth()->attempt($loginData)) {
-                return response(['message' =>     'errooo'], 404);
-               // throw new Exception('Invalid credentials');
-            }
+            $http = new \GuzzleHttp\Client;
+
+            $reponse = $http->post(config('services.passport.login_endpoint'), [
+                'form_params' => [
+                    'grant_type'    => 'password',
+                    'client_id'     => config('services.passport.client_id'),
+                    'client_secret'    => config('services.passport.client_secret'),
+                    'username' => $loginData['username'],
+                    'password' => $loginData['password'],
+                ]
+            ]);
 
 
-            $accessToken = auth()->user()->createToken('authToken')->accessToken;
-
-            return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+            return response($reponse->getBody());
         } catch (Exception $th) {
             return response(['message' => $th->getMessage()], 404);
         }
+    }
+
+    public function logout(){
+        auth()->user()->tokens->each(function($token,$key){
+            $token->delete();
+        });
+
+        return response(['Logout successifully']);
     }
 }
