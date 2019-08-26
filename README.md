@@ -9,7 +9,7 @@ Local Deploy Sequence
 3. Run `composer install`
 4. Run `php artisan key:generate`
 5. Set your database params at .env file 
-6. Run `php artisan migrate`
+6. Run `php artisan migrate --database=mysql`
 6. Run `php artisan passport:install`
 7. Run `php artisan serve`
 8. Enjoy your App

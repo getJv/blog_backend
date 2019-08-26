@@ -20,3 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register','Api\AuthController@register');
 Route::post('/login','Api\AuthController@login');
 Route::middleware('auth:api')->post('/logout','Api\AuthController@logout');
+
+
+Route::get('/post','PostController@index');
+Route::post('/post','PostController@save');
+Route::put('/post/{id}','PostController@update');
+Route::delete('/post/{id}','PostController@remove');
