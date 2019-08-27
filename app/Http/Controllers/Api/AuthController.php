@@ -20,11 +20,12 @@ class AuthController extends Controller
 
         $validatedData['password'] = bcrypt($request->password);
 
-        $user = User::create($validatedData);
-
-        $accessToken = $user->createToken('authToken')->accessToken;
-
-        return response(['user' => $user, 'access_token' => $accessToken]);
+        try {
+            $user = User::create($validatedData);
+            return response(['user' => $user]);
+        } catch (\Exception $e) {
+            return response(['error' => $e->getMessage()]);
+        }
     }
     public function login(Request $request)
     {
@@ -55,8 +56,9 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(){
-        auth()->user()->tokens->each(function($token,$key){
+    public function logout()
+    {
+        auth()->user()->tokens->each(function ($token, $key) {
             $token->delete();
         });
 

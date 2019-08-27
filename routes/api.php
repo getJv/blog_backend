@@ -23,6 +23,6 @@ Route::middleware('auth:api')->post('/logout','Api\AuthController@logout');
 
 
 Route::get('/post','PostController@index');
-Route::post('/post','PostController@save');
-Route::put('/post/{id}','PostController@update');
-Route::delete('/post/{id}','PostController@remove');
+Route::middleware('auth:api')->post('/post','PostController@save');
+Route::middleware('auth:api')->put('/post/{id}','PostController@update');
+Route::middleware('auth:api')->delete('/post/{id}','PostController@remove');
