@@ -16,8 +16,9 @@ class PostsTableSeeder extends Seeder
         for($i=0; $i < $max; $i++):
             Post::create([
                 'title' => Str::random(rand(5,15)),
-                'content'  => Str::random(rand(10,30)),
+                'content'  => Str::random(rand(10,300)),
                 'image' => "https://picsum.photos/id/" . rand(1,1000) . "/1000/300",
+                'liked'=> (bool)random_int(0, 1),
                 'author' => Str::random(8).'@gmail.com',
             ]);
 
