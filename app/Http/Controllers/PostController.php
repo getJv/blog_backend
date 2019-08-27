@@ -10,7 +10,7 @@ class PostController extends Controller
     public function index()
     {
 
-        return response(['posts' => Post::all()]);
+        return response(Post::all());
     }
 
     public function save(Request $request)
