@@ -9,6 +9,6 @@ class Post extends Eloquent
     protected $connection = 'mongodb';
 
     protected $fillable = [
-        'title', 'content','author'
+        'title', 'content','author','image'
     ];
 }
