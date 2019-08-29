@@ -5,39 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Post;
+use App\Http\Requests\PostsValidations;
 
 class PostController extends Controller
 {
     public function index()
     {
         $posts = DB::connection('mongodb')->table('posts')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return response($posts);
     }
 
-    public function save(Request $request)
+    public function save(PostsValidations $request)
     {
 
-        
-
-        $validatedData = $request->validate([
-            'title' => 'required|max:55',
-            'content' => 'required|min:10',
-            'image' => 'required|url'
-
-        ]);
-
-        
-
         try {
-            
+            $validatedData = $request->validated();
             $validatedData['author'] = \Auth::user()->email;
 
             $post = Post::create($validatedData);
 
-            
+
 
             return response($post);
         } catch (\Exception $e) {
@@ -45,22 +35,16 @@ class PostController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(PostsValidations $request, $id)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:55',
-            'content' => 'required|min:10'
-
-        ]);
-
+       
         try {
+            $validatedData = $request->validated();
 
             $post = Post::find($id);
-            $post->title    = $validatedData['title'];
-            $post->content  = $validatedData['content'];
-            $post->save();
+            $post->update($validatedData);
 
-            return response(['post' => $post]);
+            return response($post);
         } catch (\Exception $e) {
             return response(['error' => $e->getMessage()]);
         }
