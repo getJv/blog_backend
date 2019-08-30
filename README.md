@@ -1,10 +1,12 @@
-Backend
-=======
+Blog Backend
+============
 
 Video App
 ---------
 
-[App apresentation](http://teste.com)
+[App apresentation](https://youtu.be/AQody6oaqjs)
+
+[![Watch the video](https://img.youtube.com/vi/AQody6oaqjs/maxresdefault.jpg)](https://youtu.be/AQody6oaqjs)
 
 Test Requirement
 ----------------
@@ -40,8 +42,8 @@ Local Deploy Sequence
 6. Run `php artisan migrate --seed`
 6. Run `php artisan passport:install`
 7. update your `Client secret` at .env file (PASSPORT_CLIENT_SECRET)
-7. Run your code under `php artisan serve`  or your prfered webserver
-8. Enjoy your App
+8. Run your under your prefered webserver
+9. Enjoy your App
 
 Docker Users
 ------------
