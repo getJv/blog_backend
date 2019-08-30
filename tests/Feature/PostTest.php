@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\User;
+use App\Post;
 use Laravel\Passport\Passport;
 
 
@@ -16,7 +17,7 @@ class PostTest extends TestCase
          * I cant use RefreshDatabase ... some problem with Hybrid databases... 
          * Here is an workAround :D
          */
-        \Artisan::call('migrate:refresh --seed');
+        \Artisan::call('migrate:refresh');
         \Artisan::call('passport:install');
     }
 
@@ -29,7 +30,6 @@ class PostTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $response = $this->createPost();
-
         $response->assertStatus(401);
     }
 
@@ -37,16 +37,31 @@ class PostTest extends TestCase
     public function known_users_can_add_posts()
     {
 
-        //$token = $this->getToken('jhonatanvinicius@gmail.com','secret');
-
-        
-
-        $user = factory(User::class)->create();
-        Passport::actingAs($user);
-        $token = $user->createToken('MyApp')->accessToken;
-        $response = $this->createPost($token);
-        $response->assertStatus(200);
+        $response = $this->createPost($this->getToken());
+        $response->assertOk();
+        $this->assertCount(1, Post::all());
     }
+
+    /** @test  */
+    public function anyone_can_get_posts()
+    {
+
+        $response = $this->get('api/posts');
+        $response->assertOk();
+        $this->assertCount(0, Post::all());
+    }
+
+    /** @test  */
+    public function anyone_can_read_posts()
+    {
+
+        $response = $this->createPost($this->getToken());
+        $id = json_decode($response->getContent())->_id;
+        $this->get("api/post/{$id}");
+        $response->assertOk();
+        
+    }
+
 
     private function createPost($token = null)
     {
@@ -60,15 +75,10 @@ class PostTest extends TestCase
         ]);
     }
 
-    private function getToken($user, $pass)
+    private function getToken()
     {
-        $response = $this->post('api/login', [
-            'username' => $user,
-            'password' => $pass,
-        ], [
-            'Accept' => 'application/json',
-        ]);
-
-        return json_decode($response->getContent())->access_token;
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        return $user->createToken('MyApp')->accessToken;
     }
 }
