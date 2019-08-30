@@ -46,9 +46,13 @@ class PostTest extends TestCase
     public function anyone_can_get_posts()
     {
 
+        $this->createPost($this->getToken());
+        $this->createPost($this->getToken());
+        $this->createPost($this->getToken());
         $response = $this->get('api/posts');
         $response->assertOk();
-        $this->assertCount(0, Post::all());
+        $posts = json_decode($response->getContent());
+        $this->assertCount(3, $posts);
     }
 
     /** @test  */
