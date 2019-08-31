@@ -11,8 +11,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = DB::connection('mongodb')->table('posts')
-            ->orderBy('created_at', 'desc')
+        $posts = DB::table('posts')
+            ->orderBy('id', 'desc')
             ->get();
 
         return response($posts);

@@ -13,7 +13,13 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->text('content');
+            $table->string('image');
+            $table->boolean('liked')->default(false);
+            $table->string('author');
             $table->timestamps();
         });
     }
@@ -25,6 +31,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mongodb')->dropIfExists('posts');
+        Schema::dropIfExists('posts');
     }
 }

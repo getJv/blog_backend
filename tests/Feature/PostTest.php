@@ -60,7 +60,7 @@ class PostTest extends TestCase
     {
 
         $response = $this->createPost($this->getToken());
-        $id = json_decode($response->getContent())->_id;
+        $id = json_decode($response->getContent())->id;
         $this->get("api/post/{$id}");
         $response->assertOk();
         
@@ -72,7 +72,8 @@ class PostTest extends TestCase
         return $this->post('api/post', [
             'title' => 'my great Post',
             'content' => 'my Post bla bla bla',
-            'image' => 'http://www.tests.com'
+            'image' => 'http://www.tests.com',
+            'liked' => false
         ], [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token

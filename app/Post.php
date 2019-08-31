@@ -2,16 +2,11 @@
 
 namespace App;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Post extends Eloquent
+class Post extends Model
 {
-
-   
-
-    protected $connection = 'mongodb';
-
     protected $fillable = [
-        '_id','title', 'content','author','image'
+        'id','title', 'content','author','liked','image'
     ];
 }
