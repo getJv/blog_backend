@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url(env("DATABASE_URL"));
+$url = env("DATABASE_URL");
 
 $host = $url["host"];
 $username = $url["user"];
