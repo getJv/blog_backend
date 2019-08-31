@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = DB::table('posts')
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'desc')  
             ->get();
 
         return response($posts);
