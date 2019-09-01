@@ -1,5 +1,12 @@
-Blog Backend
-============
+Figured Test Blog - Backend
+===========================
+
+Live Demo on Heroku
+-------------------
+
+[https://figured-test-blog-frontend.herokuapp.com/](https://figured-test-blog-frontend.herokuapp.com/)
+* Here i'm using only postgress as DB - because its free :D 
+* The Heroku app needs to wake up on the first hit. Please be patient ;)
 
 Video App
 ---------
